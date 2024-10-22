@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content"> <!-- Asegúrate de incluir esta clase para aplicar el padding correcto -->
+    <div class="posts">
+        {% if Productos %}
+            {% for items in Productos %}
+                <div class="post" data-category="CSS">
+                    <div class="ctn-img">
+                        <img src="{{ items.imagen.url }}" alt="">
+                    </div>
+                    <h2>{{ items.nombre }}</h2>
+                    <h2>{{ items.precio }}</h2>
+                    <span>{{ items.descripcion }}</span>
+                    <!-- Botón de Editar Producto -->
+                    <a href="{% url 'modificar_producto' items.id %}">
+                        <button class="btn btn-warning">Editar</button>
+                    </a>
+
+                    <!-- Botón de Eliminar Producto -->
+                    <form action="{% url 'eliminar_producto' items.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay productos disponibles.</p>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <!-- Botón para agregar productos con clases de Bootstrap -->
+        <a href="{% url 'agregar_producto' %}">
+            <button class="btn btn-success btn-lg rounded-pill shadow-lg">Agregar Producto</button>
+        </a>    
+    </div>
+</div>
+{% endblock %}
+

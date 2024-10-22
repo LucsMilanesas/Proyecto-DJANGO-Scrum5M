@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Crud Proveedores</h1>    
+
+    <h2>{% if formulario.instance.id %}Editar Proveedor{% else %}Agregar Proveedor{% endif %}</h2>
+    
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ formulario.as_p }}  <!-- Muestra el formulario para crear -->
+
+        <input type="hidden" name="proveedor_id" value="{{ formulario.instance.id }}"> <!-- Enviar ID del proveedor -->
+        <button type="submit" name="{% if formulario.instance.id %}editar{% else %}crear{% endif %}">{{ formulario.instance.id|yesno:"Actualizar,Agregar" }} Proveedor</button>
+    
+    </form>
+    
+    <h2>Lista de Proveedores</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Gmail</th>
+                <th>Fecha de Creación</th>
+                <th>Ultima Modificación</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proveedor in proveedores %}
+            <tr>
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.direccion }}</td>
+                <td>{{ proveedor.telefono }}</td>
+                <td>{{ proveedor.email }}</td>
+                <td>{{ proveedor.creado|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ proveedor.actualizado|date:"Y-m-d H:i:s" }}</td>
+                <td>
+                    <!-- Formulario para editar -->
+                    <form method="GET" action="">
+                        {% csrf_token %}
+                        <input type="hidden" name="proveedor_id" value="{{ proveedor.id }}">
+                        <button type="submit" name="editar">Editar</button>
+                    </form>
+
+                    <!-- Formulario para eliminar -->
+                    <form method="POST" action="" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="proveedor_id" value="{{ proveedor.id }}">
+                        <button type="submit" name="eliminar" onclick="return confirm('¿Estás seguro de eliminar este proveedor?');">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

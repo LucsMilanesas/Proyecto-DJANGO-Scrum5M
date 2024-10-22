@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scrum5</title>
+    <script src="https://kit.fontawesome.com/84b1008c05.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/principal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <!--Agregar productos-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+<body>
+    <!--Header - menu-->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="{% static 'img/scrum-removebg-preview.png' %}" alt="">
+            </div>
+            <div class="menu" id="show-menu">
+                <nav>
+                    <ul>
+                        <li class="menu-selected"><a href="{% static 'blog.html' %}" class="text-menu-selected"></a>
+                            <i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="productos"> <i class="fab fa-youtube"> </i>Productos</a></li> 
+                        <li><a href="proveedores"> <i class="fas fa-file-alt"></i>Provedores</a></li>
+                        <li><a href="contacto/"> <i class="fas fa-headset"></i> Contacto</a></li>
+                        <li><a href="contacto/"> <i class="fas fa-headset"></i> Contacto</a></li>
+                        <li><a href="contacto/"> <i class="fas fa-headset"></i> Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="ctn-icon-search">
+                <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
+            </div>
+        </div>
+        <div id="icon-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

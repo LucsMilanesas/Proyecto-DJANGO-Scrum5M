@@ -1,0 +1,233 @@
+.conteiner-agregar{
+    background-color: black;
+}
+
+/* Estilos para la página de Productos */
+.productos-section {
+    padding: 50px 20px;
+    background: #f9f9f9;
+}
+
+/* Contenedor de productos */
+.productos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Tarjeta de producto */
+.producto-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+}
+
+.producto-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.producto-info {
+    padding: 20px;
+}
+
+.producto-info h3 {
+    color: #2e3a43;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.producto-info p {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.producto-precio {
+    font-size: 1.3em;
+    color: #910b01;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.producto-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #910c02;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.producto-btn:hover {
+    background-color: #aa0000;
+}
+
+/* Estilos para el formulario de agregar producto */
+.conteiner-agregar {
+    max-width: 800px;
+    margin: 100px auto 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.conteiner-agregar h2 {
+    color: #2e3a43;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Estilos del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form p {
+    margin: 0;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2e3a43;
+    font-weight: 500;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="file"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #018823;
+    outline: none;
+}
+
+/* Botón de enviar */
+.btn-primary {
+    background-color: #029c35;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    align-self: flex-start;
+}
+
+.btn-primary:hover {
+    background-color: #019219;
+}
+
+/* Barra de búsqueda */
+#ctn-bars-search {
+    position: fixed;
+    top: -80px;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    z-index: 9;
+    transition: all 600ms;
+}
+
+#ctn-bars-search.active {
+    top: 80px;
+}
+
+#ctn-bars-search input {
+    display: block;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 10px;
+    font-size: 18px;
+    outline: 0;
+    border: 1px solid #00831c;
+    border-radius: 5px;
+}
+
+#cover-ctn-search {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 7;
+    display: none;
+}
+
+/* Filtros y ordenamiento */
+.filtros-container {
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filtro-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-width: 200px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .productos-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .conteiner-agregar {
+        margin: 80px 20px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+    }
+
+    .filtro-select {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .productos-container {
+        grid-template-columns: 1fr;
+    }
+
+    .producto-card {
+        max-width: 100%;
+    }
+}

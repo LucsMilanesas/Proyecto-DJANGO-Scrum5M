@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="conteiner-agregar">       
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ formulario.as_p }} <!-- Renderiza todo el formulario -->
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Guardar Producto</button> <!-- Botón para enviar el formulario -->
+        </div>
+    </form>
+</div>
+</div>
+{% endblock %}
