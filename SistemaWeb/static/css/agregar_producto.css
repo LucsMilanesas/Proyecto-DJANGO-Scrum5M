@@ -1,0 +1,64 @@
+/* Estilos del contenedor principal */
+.content {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #343a40; /* Color del texto */
+}
+
+/* Estilos del formulario */
+.container-agregar {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container-agregar form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos de los campos del formulario */
+.container-agregar form input[type="text"],
+.container-agregar form input[type="number"],
+.container-agregar form input[type="file"],
+.container-agregar form textarea {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* Botón del formulario */
+.container-agregar .btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.container-agregar .btn:hover {
+    background-color: #0056b3; /* Color al pasar el mouse */
+}
+
+/* Estilos de aviso */
+.alert {
+    color: #dc3545;
+    margin-top: 10px;
+    font-weight: bold;
+}
+

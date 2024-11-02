@@ -1,0 +1,249 @@
+/*Portada*/
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 9px;
+    height: 90px; /* Asegúrate de que sea igual a la altura real */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.content {
+    padding-top: 100px; /* Asegúrate de que este valor sea igual o mayor que la altura del header */
+}
+
+.conteiner-agregar {
+    margin-top: 20px; /* O ajusta según sea necesario */
+}       
+  
+.conteiner__header {
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.logo img {
+    width: 200px;
+}
+
+.blog-container-cover {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    margin-top: 80px;
+    background-image: url(../img/rabi.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.blog-container-cover:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: rgba(64, 157, 92, 0.76);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.container-info-cover {
+    max-width: 800px;
+    height: 500px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.container-info-cover h1 {
+    font-size: 60px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.container-info-cover p {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/*Contenedor de categorias*/
+input[type="radio"] {
+    display: none;
+}
+
+.container-category {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.container-category label {
+    padding: 6px 40px;
+    margin: 10px;
+    font-size: 20px;
+    background: #e2e2e2;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container-category label:hover {
+    opacity: 0.8;
+}
+
+/*Post - Publicaciones*/
+.container-post {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.posts {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin-top: auto;
+    padding: 30px;
+}
+
+.posts .post {
+    background: #fff;
+    box-shadow: 0 0 20px -20px black;
+    border-radius: 6px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    justify-content: space-between;
+}
+
+.post .ctn-img {
+    width: 100%;
+}
+
+.post .ctn-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post h2 {
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 0px 20px;
+}
+
+.post span {
+    display: block;
+    margin-top: 10px;
+    padding: 0px 20px;
+}
+
+.ctn-tag {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 16px;
+    margin-top: 10px;
+}
+
+.ctn-tag li {
+    list-style: none;
+    font-size: 14px;
+    margin: 4px;
+    padding: 6px 10px;
+    background: #e8e8e8;
+    cursor: default;
+}
+
+.ctn-bars-search input {
+    display: block;
+    width: 1200px;
+    margin: auto;
+    padding: 10px;
+    font-size: 10px;
+    outline: 0;
+}
+
+.post button {
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 10px 50px;
+    font-size: 16px;
+    background: #1b6041;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.post button:hover {
+    opacity: 0.9;
+}
+
+.conteiner-agregar {
+    margin-top: 100px; /* Ajusta según sea necesario para separar el formulario */
+}
+    
+/*sistema de filtrado*/
+[value="REMERA"]:checked ~ .posts .post[data-category] {
+    display: block;
+}
+
+[value="CAMISA"]:checked ~ .posts .post:not([data-category~="CAMISA"]),
+[value="CAMPERA"]:checked ~ .posts .post:not([data-category~="CAMPERA"]),
+[value="PANTALON"]:checked ~ .posts .post:not([data-category~="PANTALON"]),
+[value="MEDIAS"]:checked ~ .posts .post:not([data-category~="MEDIAS"]),
+[value="TAZAS"]:checked ~ .posts .post:not([data-category~="TAZAS"]),
+[value="PELOTA"]:checked ~ .posts .post:not([data-category~="PELOTA"]){
+    display: none;
+}
+
+[value="REMERA"]:checked ~ .container-category [for="REMERA"],
+[value="CAMISA"]:checked ~ .container-category [for="CAMISA"],
+[value="CAMPERA"]:checked ~ .container-category [for="CAMPERA"],
+[value="PANTALON"]:checked ~ .container-category [for="PANTALON"],
+[value="MEDIAS"]:checked ~ .container-category [for="MEDIAS"],
+[value="TAZAS"]:checked ~ .container-category [for="TAZAS"],
+[value="PELOTA"]:checked ~ .container-category [for="PELOTA"] {
+    background: #000000;
+    color: #fff;
+}
+
+@media screen and (max-width: 1200px) {
+    .posts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .posts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .posts {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

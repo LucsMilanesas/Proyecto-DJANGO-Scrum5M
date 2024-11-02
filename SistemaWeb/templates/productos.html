@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+    <!-- Si deseas agregar más estilos específicos para productos -->
+    <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+{% endblock %}
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="{% static 'img/scrum-removebg-preview.png' %}" alt="">
+        </div>
+        <div class="menu" id="show-menu">
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="menu-selected"><a href="/productos/" class="text-menu-selected">
+                        <i class="fab fa-youtube"></i> Productos</a></li>
+                    <li><a href="/proveedores/"> <i class="fas fa-headset"></i> Proveedores</a></li>
+                    <li><a href="/nosotros/"><i class="fas fa-file-alt"></i> Nosotros</a></li>
+                    <li><a href="/contacto/"><i class="fas fa-headset"></i> Contacto</a></li>
+                    <li><a href="/Marca/"><i class="fas fa-headset"></i> Marca </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="icon-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+</header>
+<div class="content"> 
+    <div class="posts">
+        {% if Productos %}
+            {% for items in Productos %}
+                <div class="post" data-category="CSS">
+                    <div class="ctn-img">
+                        <img src="{{ items.imagen.url }}" alt="Producto: {{ items.nombre }}">
+                    </div>
+                    <h2>{{ items.nombre }}</h2>
+                    <h3>Precio: ${{ items.precio }}</h3>
+                    <p>{{ items.descripcion }}</p>
+
+                    <!-- Botón de Editar Producto -->
+                    <a href="{% url 'modificar_producto' items.id %}">
+                        <button class="btn btn-warning">Editar</button>
+                    </a>
+
+                    <!-- Botón de Eliminar Producto -->
+                    <form action="{% url 'eliminar_producto' items.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay productos disponibles.</p>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <a href="{% url 'agregar_producto' %}">
+            <button class="btn btn-success btn-lg rounded-pill shadow-lg">Agregar Producto</button>
+        </a>    
+    </div>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm('¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.');
+    }
+</script>
+{% endblock %}
+
+
+

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="ctn-bars-search">
+    <input type="text" id="inputSearch" placeholder="¿Qué deseas buscar?">
+</div>
+<div id="cover-ctn-search"></div>
+
+<!--Portada-->
+<div class="container-all" id="move-content">
+    <div class="blog-container-cover">
+        <div class="container-info-cover">
+            <h1>¡Tu tienda de confianza!</h1>
+            <p>La fuerza no proviene de lo que puedes hacer, sino de superar lo que creías que no podías..</p>
+        </div>
+    </div>
+
+    <div class="container-post">
+        <input type="radio" id="REMERA" name="categories" value="REMERA" checked>
+        <input type="radio" id="CAMISA" name="categories" value="CAMISA">
+        <input type="radio" id="CAMPERA" name="categories" value="CAMPERA">
+        <input type="radio" id="PANTALON" name="categories" value="PANTALON">
+        <input type="radio" id="MEDIAS" name="categories" value="MEDIAS">
+        <input type="radio" id="TAZAS" name="categories" value="TAZAS">
+        <input type="radio" id="PELOTA" name="categories" value="PELOTA">
+
+        <div class="container-category">
+            <label for="REMERA">REMERA</label>
+            <label for="CAMISA">CAMISA</label>
+            <label for="CAMPERA">CAMPERA</label>
+            <label for="PANTALON">PANTALON</label>
+            <label for="MEDIAS">MEDIAS</label>
+            <label for="TAZAS">TAZAS</label>
+            <label for="PELOTA">PELOTA</label>
+        </div>
+        <div class="posts">
+        {% if Productos %}
+            {% for items in Productos %}
+                <div class="post" data-category="CSS">
+                    <div class="ctn-img">
+                        <img src="{{ items.imagen.url }}" alt="">
+                    </div>
+                    <h2>{{ items.nombre }}</h2>
+                    <h2>{{ items.precio }}</h2>
+                    <span>{{ items.descripcion }}</span>
+                    <a href="   "><button>Comprar</button></a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay productos disponibles.</p>
+        {% endif %}             
+        </div>
+    <div class="container-footer">	
+        <footer>
+            <div class="logo-footer">
+                <img src="{% static 'img/pelota.png' %}" alt="">
+            </div>
+            <div class="redes-footer">
+                <a href="#"><i class="fab fa-facebook-f icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-instagram icon-redes-footer"></i></a>
+            </div>
+            <hr>
+            <h4>© Hecho solamente por Josesito - Todos los Derechos Reservados</h4>
+        </footer>
+    </div>
+</div>
+{% endblock %}

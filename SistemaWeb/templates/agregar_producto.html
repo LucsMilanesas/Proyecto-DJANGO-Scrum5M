@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/agregar_producto.css' %}"> <!-- Asegúrate de tener este archivo CSS -->
+{% endblock %}
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="{% static 'img/scrum-removebg-preview.png' %}" alt="">
+        </div>
+        <div class="menu" id="show-menu">
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="/productos/"> <i class="fab fa-youtube"></i> Productos</a></li>
+                    <li><a href="/proveedores/"> <i class="fas fa-file-alt"></i>Proveedores</a></li>
+                    <li><a href="/contacto/"> <i class="fas fa-headset"></i> Contacto</a></li>
+                    <li><a href="/nosotros/"> <i class="fas fa-headset"></i> Nosotros</a></li>
+                    <li><a href="/marca/"> <i class="fas fa-headset"></i> Marca</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="icon-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+</header>
+
+<div class="content"> 
+    <h1>Agregar Producto</h1> <!-- Título de la página -->
+    <div class="container-agregar">       
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ formulario.as_p }} <!-- Renderiza todo el formulario -->
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Guardar Producto</button> <!-- Botón para enviar el formulario -->
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

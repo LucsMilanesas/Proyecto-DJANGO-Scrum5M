@@ -1,0 +1,92 @@
+/* Estilo del contenedor general */
+.container-agregar {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la alerta de errores */
+.alert {
+    background-color: #ffcccc;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 5px solid #ff5c5c;
+    color: #a94442;
+}
+
+/* Campos del formulario */
+.container-agregar form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Input y textarea */
+.container-agregar input[type="text"],
+.container-agregar input[type="email"],
+.container-agregar textarea,
+.container-agregar select {
+    width: 100%;
+    padding: 15px;
+    font-size: 1em;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+/* Input en foco */
+.container-agregar input:focus,
+.container-agregar textarea:focus,
+.container-agregar select:focus {
+    border-color: #017a30; /* Verde oscuro */
+    outline: none;
+    box-shadow: 0 0 5px rgba(1, 122, 48, 0.4); /* Sombra verde suave */
+}
+
+/* Botón de envío */
+.container-agregar .btn {
+    background-color: #017a30; /* Verde oscuro */
+    color: white;
+    padding: 12px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto hover */
+.container-agregar .btn:hover {
+    background-color: #015922; /* Verde más oscuro */
+    transform: translateY(-3px); /* Elevación ligera */
+}
+
+/* Efecto active */
+.container-agregar .btn:active {
+    background-color: #028f25; /* Verde más claro */
+    transform: translateY(0);
+}
+
+/* Etiquetas del formulario */
+.container-agregar label {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Mensajes de error para los campos */
+.alert p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    color: #a94442;
+}
+
+/* Estilo de los mensajes de error individuales */
+.alert p::before {
+    content: "⚠ "; /* Icono de alerta */
+    color: #a94442;
+}

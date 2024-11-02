@@ -1,0 +1,81 @@
+/* proveedores.css */
+
+/* Estilos del título principal */
+h1 {
+    text-align: center;
+    color: #343a40;
+    margin-top: 30px;
+}
+
+/* Estilos del contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 20px auto; /* Centramos el contenedor */
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilos de los encabezados de sección */
+.container h2 {
+    font-size: 22px;
+    color: #02970e; /* Color del título */
+    margin-bottom: 20px; /* Margen inferior */
+}
+
+/* Estilos del formulario */
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los elementos */
+}
+
+/* Estilo del botón */
+.container .btn {
+    padding: 10px 15px;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+    transition: background-color 0.3s; /* Transición para el color */
+}
+
+/* Estilos de la tabla */
+.table {
+    width: 100%; /* Ancho completo */
+    margin-top: 20px; /* Margen superior */
+    border-collapse: collapse; /* Colapsar bordes */
+}
+
+/* Estilo de celdas de la tabla */
+.table th,
+.table td {
+    padding: 10px; /* Espaciado interno */
+    text-align: left; /* Alineación a la izquierda */
+    border-bottom: 1px solid #eaeaea; /* Línea debajo de cada celda */
+}
+
+/* Color de fondo para el encabezado de la tabla */
+.table th {
+    background-color: #f8f9fa; /* Fondo claro */
+}
+
+/* Estilos de los botones dentro de la tabla */
+.table .btn {
+    margin: 0; /* Sin márgenes */
+}
+
+/* Estilo de botones de acción */
+.btn-warning {
+    background-color: #1d7502; /* Color amarillo */
+    color: white; /* Texto blanco */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Color rojo */
+    color: white; /* Texto blanco */
+}
+
+/* Cambiar el color de los botones al pasar el mouse */
+.btn:hover {
+    opacity: 0.8; /* Cambiar la opacidad */
+}

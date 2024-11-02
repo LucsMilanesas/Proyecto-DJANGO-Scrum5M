@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+    <!-- Si deseas agregar más estilos específicos para productos -->
+    <link rel="stylesheet" href="{% static 'css/crud_proveedores.css' %}">
+{% endblock %}
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="{% static 'img/scrum-removebg-preview.png' %}" alt="">
+        </div>
+        <div class="menu" id="show-menu">
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="/productos/"><i class="fab fa-youtube"></i> Productos</a></li>
+                    <li class="menu-selected"><a href="/proveedores/" class="text-menu-selected">
+                        <i class="fas fa-truck"></i> Proveedores</a></li>
+                    <li><a href="/nosotros/"><i class="fas fa-file-alt"></i> Nosotros</a></li>
+                    <li><a href="/contacto/"><i class="fas fa-headset"></i> Contacto</a></li>
+                    <li><a href="/marca/"> <i class="fas fa-headset"></i> Marca</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="icon-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+</header>
+
+<h1>Crud Proveedores</h1>    
+
+<div class="container">
+    <h2>{% if formulario.instance.id %}Editar Proveedor{% else %}Agregar Proveedor{% endif %}</h2>
+    
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ formulario.as_p }}
+
+        <input type="hidden" name="proveedor_id" value="{{ formulario.instance.id }}"> 
+        <button type="submit" name="{% if formulario.instance.id %}editar{% else %}crear{% endif %}" class="btn btn-primary">
+            {{ formulario.instance.id|yesno:"Actualizar,Agregar" }} Proveedor
+        </button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>Lista de Proveedores</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Fecha de Creación</th>
+                <th>Última Modificación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proveedor in proveedores %}
+            <tr>
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.direccion }}</td>
+                <td>{{ proveedor.telefono }}</td>
+                <td>{{ proveedor.email }}</td>
+                <td>{{ proveedor.creado|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ proveedor.actualizado|date:"Y-m-d H:i:s" }}</td>
+                <td>
+                    <form method="GET" action="">
+                        {% csrf_token %}
+                        <input type="hidden" name="proveedor_id" value="{{ proveedor.id }}">
+                        <button type="submit" name="editar" class="btn btn-warning">Editar</button>
+                    </form>
+                    <form method="POST" action="" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="proveedor_id" value="{{ proveedor.id }}">
+                        <button type="submit" name="eliminar" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este proveedor?');">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

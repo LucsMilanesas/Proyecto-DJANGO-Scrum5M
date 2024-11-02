@@ -1,0 +1,77 @@
+.posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Múltiples tarjetas en fila */
+    gap: 20px; /* Espacio entre las tarjetas */
+    justify-content: center; /* Alinea las tarjetas al centro */
+    padding: 20px;
+}
+
+/* Estilo para cada tarjeta de producto */
+.post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 300px; /* Ancho fijo */
+    height: 450px; /* Alto fijo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto hover en las tarjetas */
+.post:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilo para la imagen del producto */
+.ctn-img img {
+    width: 100%; /* Ancho completo de la tarjeta */
+    height: 200px; /* Alto fijo para la imagen */
+    object-fit: cover; /* Ajuste de imagen sin deformar */
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Botones de acción (editar, eliminar) */
+.post a button,
+.post form button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+/* Estilo para el mensaje de "No hay productos disponibles" */
+.no-products {
+    grid-column: 1 / -1; /* Ocupa todo el ancho del grid */
+    text-align: center;
+    font-size: 1.5em;
+    color: #666;
+    margin: 40px 0;
+}
+
+/* Botón para agregar productos */
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container .btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #028f25;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.container .btn:hover {
+    background-color: #02691b;
+    transform: translateY(-5px);
+}
