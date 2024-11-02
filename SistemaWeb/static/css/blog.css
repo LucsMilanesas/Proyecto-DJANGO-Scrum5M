@@ -43,7 +43,7 @@ header {
     width: 100%;
     height: 500px;
     position: relative;
-    margin-top: 80px;
+    margin-top: -10px;
     background-image: url(../img/rabi.webp);
     background-position: center;
     background-size: cover;

@@ -6,6 +6,30 @@
     <link rel="stylesheet" href="{% static 'css/marca.css' %}">
 {% endblock %}
 
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="{% static 'img/scrum-removebg-preview.png' %}" alt="">
+        </div>
+        <div class="menu" id="show-menu">
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="/productos/"> <i class="fas fa-headset"></i> Productos</a></li>
+                    <li class="menu-selected"><a href="/marca/" class="text-menu-selected">
+                        <i class="fab fa-youtube"></i> Marca</a></li>
+                    <li><a href="/proveedores/"> <i class="fas fa-headset"></i> Proveedores</a></li>
+                    <li><a href="/nosotros/"><i class="fas fa-file-alt"></i> Nosotros</a></li>
+                    <li><a href="/contacto/"><i class="fas fa-headset"></i> Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="icon-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+</header>
+
 <div class="container-agregar">
     {% if formarca.errors %}
         <div class="alert alert-danger">
