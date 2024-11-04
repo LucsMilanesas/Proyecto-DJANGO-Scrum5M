@@ -42,8 +42,6 @@ class Usuarios(models.Model):
         if len(self.contraseña) < 8:
             raise ValidationError('La contraseña debe tener al menos 8 caracteres.')
 
-
-
 class Caja(models.Model):
     #id_caja = models.AutoField(primary_key=True)
     fecha = models.DateField()
@@ -57,7 +55,6 @@ class Caja(models.Model):
         # Aquí usamos el campo 'id' que Django crea automáticamente
         return f"Caja {self.id} - {self.fecha} - Saldo Inicial: {self.saldo_inicial} - Saldo Final: {self.saldo_final}"
 
-    
 class Venta(models.Model):
     #id_venta = models.AutoField(primary_key=True)
     fecha = models.DateField()
@@ -66,7 +63,6 @@ class Venta(models.Model):
     caja = models.ForeignKey(Caja, on_delete=models.CASCADE)
     Usuarios = models.ForeignKey(Usuarios, on_delete=models.CASCADE, default=1)
     
-
     def __str__(self):
         return f"Venta {self.id} - {self.fecha}"
     
@@ -77,6 +73,26 @@ class Marca(models.Model):
     def __str__(self):
         return self.nombre
     
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.nombre
+
+class Talle(models.Model):
+    nombre = models.CharField(max_length=30)
+    numero = models.IntegerField()
+
+    def __str__ (self):
+        return self.nombre
+    
+class TallexCategoria(models.Model):
+    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
+    talle = models.ForeignKey(Talle, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.categoria
+    
 class Producto(models.Model):
     #id_producto = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
@@ -85,16 +101,12 @@ class Producto(models.Model):
     descripcion = models.TextField()
     nuevo = models.BooleanField()
     stock = models.IntegerField(default=0)
-    marca = models.ForeignKey(Marca, on_delete=models.SET_NULL, null=True, blank=True)  # Relación con Categoría
+    marca = models.ForeignKey(Marca, on_delete=models.SET_NULL, null=True, blank=True)
+    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
     imagen = models.ImageField(upload_to="productos", null=True)
-    
-    def save(self, *args, **kwargs):
-            if self.pk is None:  # Encriptar la contraseña solo al crear un usuario nuevo
-                self.contraseña = make_password(self.contraseña)
-            super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido}"
+        return f"{self.nombre}"
     
 class DetalleVenta(models.Model):
     #id_detalle = models.AutoField(primary_key=True)
@@ -142,25 +154,13 @@ class Proveedor(models.Model):
     def __str__(self):
         return self.nombre
 
-""" #Existe un Conflicto con esta parte del DER
-class CompraProveedor(models.Model):
-    #id_cp = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    cantidad = models.IntegerField()
-
-    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, related_name='compras')
-    fecha_compra = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'Compra {self.id} - Proveedor: {self.proveedor.nombre}'
-    
+ #Existe un Conflicto con esta parte del DER
 class DetalleCompra(models.Model):
     #id_det_compra = models.AutoField(primary_key=True)
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    compra_proveedor = models.ForeignKey(CompraProveedor, on_delete=models.CASCADE)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"Detalle Compra {self.id} - Producto: {self.pedido}" """
+        return f"Detalle Compra {self.id} - Producto: {self.pedido}"
