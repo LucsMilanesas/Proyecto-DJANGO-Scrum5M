@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 #from django.http import HttpResponse
-from .models import Producto, Proveedor, Marca, Usuarios
+from .models import Producto, Proveedor, Marca, Usuarios, Tipos
 from .forms import ProductoForm, ProveedorForm, MarcaForm, UsuarioRegistroForm
+
+from django.contrib.auth import logout
+from django.contrib import messages
 
 def base(request):
     pro = Producto.objects.all()[:4]
@@ -32,8 +35,6 @@ def agregar_producto(request):
     }
     
     return render(request, 'agregar_producto.html', context)
-
-
 def productos(request):
     pro = Producto.objects.all()  # Consulta todos los productos
     formulario = ProductoForm()  # Crea un formulario vacío (solo para agregar productos)
@@ -44,8 +45,6 @@ def productos(request):
     }
     
     return render(request, 'productos.html', context)
-
-
 def modificar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)  # Busca el producto o lanza un error 404
     if request.method == 'POST':
@@ -57,8 +56,6 @@ def modificar_producto(request, id):
         form = ProductoForm(instance=producto)  # Rellena el formulario con los datos del producto
     
     return render(request, 'modificar_producto.html', {'form': form})
-
-
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)  # Busca el producto o lanza un error 404
     if request.method == 'POST':  # Solo si es una petición POST se elimina el producto
@@ -66,6 +63,20 @@ def eliminar_producto(request, id):
         return redirect('productos')  # Redirige a la lista de productos después de eliminar
     
     return render(request, 'confirmar_eliminar.html', {'producto': producto})
+
+def marca(request):
+    if request.method == 'POST':
+        formarca = MarcaForm(request.POST, request.FILES)
+        if formarca.is_valid():
+            formarca.save()
+            return redirect('marca')
+    else:
+        formarca =  MarcaForm()
+    context = {
+        'formarca': formarca,
+    }
+    return render(request, 'marca.html', context)
+
 
 def crud_proveedores(request):
     proveedores = Proveedor.objects.all()  # Obtener todos los proveedores
@@ -95,33 +106,18 @@ def crud_proveedores(request):
     else:
         formulario = ProveedorForm()  # Crear un formulario vacío para agregar
 
-
     # Si es una petición GET, verifica si hay un proveedor a editar
     proveedor_id = request.GET.get('proveedor_id')
     if proveedor_id:
         proveedor = get_object_or_404(Proveedor, id=proveedor_id)
         formulario = ProveedorForm(instance=proveedor)  # Cargar el proveedor para editar
 
-
     return render(request, 'crud_proveedores.html', {
         'proveedores': proveedores,
         'formulario': formulario
     })
 
-def marca(request):
-    if request.method == 'POST':
-        formarca = MarcaForm(request.POST, request.FILES)
-        if formarca.is_valid():
-            formarca.save()
-            return redirect('marca')
-    else:
-        formarca =  MarcaForm()
-    context = {
-        'formarca': formarca,
-    }
-    return render(request, 'marca.html', context)
-
-def registro_usuario(request):
+""" def registro_usuario(request):
     if request.method == 'POST':
         form = UsuarioRegistroForm(request.POST)
         if form.is_valid():
@@ -135,4 +131,35 @@ def registro_usuario(request):
     else:
         form = UsuarioRegistroForm()
 
-    return render(request, 'registro.html', {'form': form})
+    return render(request, 'registro.html', {'form': form}) """
+
+
+#Iniciar Secion, Cerrar Sesion, Registrar Usuarios
+#Old Register
+""" def register_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
+        Usuarios.objects.create_user(username=username, password=password, email=email)
+        return redirect('login')  # Redirige a la página de login después de crear el usuario.
+    return render(request, 'register.html') """
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UsuarioRegistroForm(request.POST)
+        if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.set_password(form.cleaned_data['password'])  # Hashear la contraseña
+            usuario.save()
+            messages.success(request, 'Usuario registrado exitosamente.')
+            return redirect('login')
+    else:
+        form = UsuarioRegistroForm()
+    
+    return render(request, 'register.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Has cerrado sesión correctamente.')
+    return redirect('/')

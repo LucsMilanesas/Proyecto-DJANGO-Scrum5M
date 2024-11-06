@@ -20,7 +20,8 @@
             <div class="menu" id="show-menu">
                 <nav>
                     <ul>
-                        <li class="menu-selected"><a href=""><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="menu-selected"><a href="" class="text-menu-selected">
+                            <i class="fas fa-home"></i> Inicio</a></li>
                         <li><a href="/productos/"><i class="fab fa-youtube"></i> Productos</a></li> 
                         <li><a href="/marca/"><i class="fas fa-headset"></i> Marca</a></li>
                         <li><a href="/proveedores/"><i class="fas fa-file-alt"></i> Proveedores</a></li>
@@ -31,13 +32,19 @@
             </div>
             <!-- Login/Logout -->
             <div class="user-login">
+
                 {% if user.is_authenticated %}
-                    <a href="">
-                        <img src="" alt="Foto de perfil" class="user-photo">
-                    </a>
+                    <p>Bienvenido, {{ user.username }}!</p>
+
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout">Cerrar sesión</button>
+                    </form>
+
                 {% else %}
-                    <a href="   "><button>Login</button></a>
+                    <a href="/login/"><button>Login</button></a>
                 {% endif %}
+
             </div>
             <div id="icon-menu">
                 <i class="fas fa-bars"></i>

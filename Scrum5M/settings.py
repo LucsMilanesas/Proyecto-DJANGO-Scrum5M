@@ -104,7 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+""" LANGUAGE_CODE = 'en-us' """
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
@@ -126,3 +127,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Agregamos esta linea para la validacion del login usando AbstractUser
+AUTH_USER_MODEL = 'SistemaWeb.Usuarios'
+LOGIN_REDIRECT_URL = '/'  #Despues del login, redirije a la pantalla principal
+LOGOUT_REDIRECT_URL = '/' #Cierra el login y redirije a la pantalla principal
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

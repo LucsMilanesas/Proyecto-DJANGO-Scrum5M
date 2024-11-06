@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -9,7 +9,30 @@ class Tipos(models.Model):
     def __str__(self):
         return f"{self.nombre}"
 
-class Usuarios(models.Model):
+#Heredar de la clase AbstractUser de DJango
+class Usuarios(AbstractUser):
+    #AbstractUser ya tiene los campos: username = usuario, password = contraseña, email = gmail, firstname = nombre, lastname = apellido.
+    #Las autenticaciones de gmail y contraseña se hacen desde abstractuser.
+    dni = models.CharField(max_length=20)
+    domicilio = models.CharField(max_length=255)
+    telefono = models.CharField(max_length=15)
+    tipos = models.ForeignKey('Tipos', on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"
+        
+    def clean(self):
+        super().clean()
+        
+        # Validación del DNI
+        if not self.dni.isdigit() or len(self.dni) != 8:  # Asumiendo que el DNI tiene 8 dígitos
+            raise ValidationError('El DNI debe tener 8 dígitos y ser numérico.')
+
+        # Validación del teléfono
+        if not self.telefono.isdigit():
+            raise ValidationError('El teléfono debe ser numérico.')
+
+""" class Usuarios(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     dni = models.CharField(max_length=20)
@@ -40,7 +63,7 @@ class Usuarios(models.Model):
 
         # Validación de contraseña
         if len(self.contraseña) < 8:
-            raise ValidationError('La contraseña debe tener al menos 8 caracteres.')
+            raise ValidationError('La contraseña debe tener al menos 8 caracteres.') """
 
 class Caja(models.Model):
     #id_caja = models.AutoField(primary_key=True)
@@ -123,7 +146,7 @@ class DetalleVenta(models.Model):
 
 class Pedido(models.Model):
     #id_pedido = models.AutoField(primary_key=True)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     #producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     #cantidad = models.PositiveIntegerField()
     fecha_pedido = models.DateTimeField(auto_now_add=True)
